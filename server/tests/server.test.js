@@ -73,6 +73,7 @@ describe('GET /todos', () => {
   });
 });
 
+
 describe('GET /todos/:id', () => {
   it('should return todo doc', (done) => {
     request(app)
@@ -96,7 +97,7 @@ describe('GET /todos/:id', () => {
   it('should return 404 for non-object ids', (done) => {
     request(app)
       .get('/todos/123abc')
-      .expect(404)
+      .expect(400)
       .end(done);
   });
 });

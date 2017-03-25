@@ -43,7 +43,7 @@ app.get('/todos/:id', (req, res) => {
         // Valid id using isn't Valid
         return res.status(400).send();
     }
-    User.findById(id).then((todo)=> {
+    Todo.findById(id).then((todo)=> {
         if(!todo) {
             res.status(404).send();
         }
@@ -51,6 +51,25 @@ app.get('/todos/:id', (req, res) => {
         //console.log('todo found', todo);
     }).catch((e) => {
         res.status(400).send();
+    });            
+});
+
+// 58d6bb50c16a3ab074e15986
+app.delete('/todos/:id', (req, res) => {
+    var id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        // Valid id using isn't Valid
+        return res.status(404).send();
+    }
+    Todo.findByIdAndRemove(id).then((todo)=> {
+        if(!todo) {
+            res.status(404).send();
+        }
+        res.send(todo);
+        //console.log('todo found', todo);
+    }).catch((e) => {
+        res.status(404).send();
     });            
 });
 
